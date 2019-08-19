@@ -1,2 +1,2 @@
 # Latency_Model_Comparison_Public
-Code for TB model structure comparison
+Code used to produce results in Sumner and White, Modelling the impact of tuberculosis preventive therapy: the importance of model structure
