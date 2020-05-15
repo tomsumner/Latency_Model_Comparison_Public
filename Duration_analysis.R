@@ -56,6 +56,8 @@ kk <- 0
 pars_duration <- list(cov_PT=0.05)
 # Vector of names for reinfection assumption
 reinfection_list <- c("Yes","No")
+# efficacy of PT = 60%
+w = 0.4
 
 # time to run model for
 tend <- 11
@@ -120,12 +122,12 @@ incidence_plot_duration <- ggplot(outputs_duration_melt[outputs_duration_melt$va
   guides(linetype=FALSE)+
   theme(plot.margin = unit(c(1,1,1,1), "cm"))
 
-# plot intervention outputs as function of incidence or beta
+# plot intervention outputs as function of incidence or beta - figure A3
 outputs_duration_melt <- melt(outputs_duration,id.vars=c("Duration of early latency","Incidence","Reinfection model","Beta"))
 outputs_duration_melt$value <- as.numeric(as.character(outputs_duration_melt$value))
 outputs_duration_melt$Incidence <- as.numeric(as.character(outputs_duration_melt$Incidence))
 outputs_duration_melt$Beta <- as.numeric(as.character(outputs_duration_melt$Beta))
-outputs_plot_I_duration <- ggplot(outputs_duration_melt[outputs_duration_melt$variable%in%c("% Reduction in incidence",
+Figure_A3 <- ggplot(outputs_duration_melt[outputs_duration_melt$variable%in%c("% Reduction in incidence",
                                                                                             "NNT with PT to avert one case",
                                                                                             "Cumulative cases averted",
                                                                                             "Cumulative number given PT")&

@@ -22,14 +22,12 @@ source("Model_3_cum.R")
 source("Model_1.R")
 source("Model_2.R")
 source("Model_3.R")
-source("Model_1a.R")
-source("Model_2a.R")
 
 # Set up accessible palette for plotting
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 ##############################################################################################################################################
-# This script implements the analysis of the cumulaitve TB risk reported in the main text
+# This script implements the analysis of the cumulaitve TB risk reported in the appendix
 
 source("Cumulative_incidence_analysis.R")
 
