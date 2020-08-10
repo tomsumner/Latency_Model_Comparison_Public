@@ -285,5 +285,3 @@ Figure_3 <- ggplot(temp[temp$Model%in%c("1","2","3"),])+
   guides(fill = FALSE)+
   guides(linetype = guide_legend(nrow = 1))+
   theme(text = element_text(size=18))
-
-#############################################################

@@ -13,19 +13,19 @@
 tau <- 1         # rate of recovery
 u <- 1/50        # natural mortality
 m <- 0.03        # TB mortality
-qr_S <- c(0.5,0) # rel sus after prior infection - consider 2 situations: 0=no reinfection; 0.5 50% protection against disease following reinfection
+qr <- c(0.5,0)   # rel sus after prior infection - consider 2 situations: 0=no reinfection; 0.5 50% protection against disease following reinfection
 
 # These parameters vary by model and source (Menzies or Ragonnet)
 # proportion direct TB - NOTE THE VALUE FOR MODEL 3 IN RAGONNET IS NOT REPORTED IN THE PAPER SO WAS OBTAINED BY FITTING
-ar_S <- cbind(c(0,0,0.0665),c(0,0,0.085))  
+ar <- cbind(c(0,0,0.0665),c(0,0,0.085))  
 # proportion to early latent state 
-br_S <- cbind(c(0,0.0860,0),c(0,1-0.91,0))  
+br <- cbind(c(0,0.0860,0),c(0,1-0.91,0))  
 # progression from late latent state - NOTE THE VALUE FOR MODEL IN RAGONNET IS NOT REPORTED IN THE PAPER SO WAS OBTAINED BY FITTING
-cr_S <- cbind(c(0.000594,0.000594,0.00337),c(5.5e-6,5.5e-6,8.52e-6))       
+cr <- cbind(c(0.000594,0.000594,0.00337),c(5.5e-6,5.5e-6,8.52e-6))       
 # progression from early latent state 
-kr_S <- cbind(c(0.0826,0.955,0),c(1.1e-3,1.1e-2,0))   
+kr <- cbind(c(0.0826,0.955,0),c(1.1e-3,1.1e-2,0))   
 # movement to late latent state 
-er_S <- cbind(c(0.872,0,0),c(1.1e-2,0,0))                        
+er <- cbind(c(0.872,0,0),c(1.1e-2,0,0))                        
 
 #######################################################################################################################
 # CALCUATE AND PLOT CUMULATIVE INCIDENCE
@@ -34,22 +34,22 @@ pars <- c()   # no parameter to pass
 t_max <- 7300 # this is 20 years in days
 
 # Array to hold outputs
-Cum_out_S <- array(NA,dim=c(t_max+1,dim(er_S)[1],dim(er_S)[2]))
+Cum_out_S <- array(NA,dim=c(t_max+1,dim(er)[1],dim(er)[2]))
 
-for (ii in 1:dim(er_S)[1]){         # For each model 
-  for (zz in 1:dim(er_S)[2]){       # For each parameterisation
+for (ii in 1:dim(er)[1]){         # For each model 
+  for (zz in 1:dim(er)[2]){       # For each parameterisation
     
     # Pick the right parameters
-    a <- ar_S[ii,zz]
-    b <- br_S[ii,zz]
-    c <- cr_S[ii,zz]
-    k <- kr_S[ii,zz]
-    e <- er_S[ii,zz]
+    a <- ar[ii,zz]
+    b <- br[ii,zz]
+    c <- cr[ii,zz]
+    k <- kr[ii,zz]
+    e <- er[ii,zz]
     
     # define the initial conditions
     state_cum_S <- list(c(LA=1,LB=0,I=0),                      # Model 1 - all in early latent state
-                        c(LA=br_S[2,zz],LB=1-br_S[2,zz],I=0),  # Model 2 - split between early and late latent states
-                        c(L=1-ar_S[3,zz],I=ar_S[3,zz]))        # Model 3 - split between latent and disease
+                        c(LA=br[2,zz],LB=1-br[2,zz],I=0),  # Model 2 - split between early and late latent states
+                        c(L=1-ar[3,zz],I=ar[3,zz]))        # Model 3 - split between latent and disease
     state <- unlist(state_cum_S[ii])
     
     # Run the model
@@ -128,3 +128,7 @@ LL_S <- rbind(
 
 # Proportion of risk in early latency 
 per_early_S <- LE_S/L_S
+
+
+
+
